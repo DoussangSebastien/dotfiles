@@ -1,0 +1,109 @@
+-- INDENTS
+vim.opt.smartindent = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.g.mapleader = " "
+
+-- line numbers
+vim.opt.relativenumber = false
+vim.opt.number = true
+
+--clipboard
+vim.opt.clipboard:append("unnamedplus")
+
+--start LSP
+vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
+  callback = function(args)
+    local clients = vim.lsp.get_clients({ bufnr = args.buf })
+    if #clients == 0 then
+      vim.cmd("LspStart")
+    end
+  end,
+})
+
+-- EPITECH HEADERS
+vim.cmd([[
+syntax on
+
+set autoindent
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set smartindent
+
+function! InsertHeaderC()
+    let l:filename = expand("%:t")
+    let l:dirname = fnamemodify(getcwd(), ':t') " Get current directory name
+    let l:header = [
+                \ '/*',
+                \ '** EPITECH PROJECT, 2025',
+                \ '** ' . l:dirname,
+                \ '** File description:',
+                \ '** ' . l:filename,
+                \ '*/',
+                \ ''
+                \ ]
+    call append(0, l:header)
+endfunction
+
+function! InsertHeaderMakefile()
+    let l:filename = expand("%:t")
+    let l:dirname = fnamemodify(getcwd(), ':t') " Get current directory name
+    let l:header = [
+                \ '##',
+                \ '## EPITECH PROJECT, 2025',
+                \ '## ' . l:dirname,
+                \ '## File description:',
+                \ '## ' . l:filename,
+                \ '##',
+                \ ''
+                \ ]
+    call append(0, l:header)
+endfunction
+
+function! InsertHeaderPython()
+    let l:filename = expand("%:t")
+    let l:dirname = fnamemodify(getcwd(), ':t') " Get current directory name
+    let l:header = [
+                \ '#!/usr/bin/env python3',
+                \ '#',
+                \ '# EPITECH PROJECT, 2025',
+                \ '# ' . l:dirname,
+                \ '# File description:',
+                \ '# ' . l:filename,
+                \ '#',
+                \ ''
+                \ ]
+    call append(0, l:header)
+endfunction
+
+function! InsertHeaderH()
+    let l:filename = expand("%:t")
+    let l:dirname = fnamemodify(getcwd(), ':t')
+    let l:macro_name = substitute(toupper(l:filename), '\.', '_', 'g') . '_'
+
+    let l:header = [
+                \ '/*',
+                \ '** EPITECH PROJECT, 2025',
+                \ '** ' . l:dirname,
+                \ '** File description:',
+                \ '** ' . l:filename,
+                \ '*/',
+                \ '',
+                \ '#ifndef ' . l:macro_name,
+                \ '    #define ' . l:macro_name,
+                \ '',
+                \ '#endif /* ' . l:macro_name . ' */',
+                \ ]
+    call append(0, l:header)
+endfunction
+
+nnoremap <C-p> :call InsertHeaderPython()<CR>
+
+autocmd BufNewFile *.c call InsertHeaderC()
+autocmd BufNewFile *.h call InsertHeaderH()
+autocmd BufNewFile Makefile call InsertHeaderMakefile()
+]])
