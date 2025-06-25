@@ -1,0 +1,96 @@
+{
+  "layer": "top",
+    "modules-left": ["custom/arch", "hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["backlight", "pulseaudio", "bluetooth", "network", "battery", "custom/exit"],
+    "custom/arch": {
+      "format": "  ",
+      "tooltip": false,
+    },
+    "hyprland/workspaces": {
+      "format": "{name}",
+      "format": "{icon}",
+      "tooltip": false,
+      "all-outputs": true,
+      "format-icons": {
+        "active": "",
+        "default": ""
+      }
+    },
+    "clock": {
+      "format": " {:%H:%M}",
+      "format-alt": " {:%H:%M   %Y, %d %B, %A}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+      "mode"          : "year",
+      "mode-mon-col"  : 3,
+      "weeks-pos"     : "right",
+      "on-scroll"     : 1,
+      "on-click-right": "mode",
+      "format": {
+      "months":     "<span color='#ffead3'><b>{}</b></span>",
+      "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+      "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+      "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+      "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                }
+  },
+    },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{icon} {percent}%",
+      "tooltip": false,
+      "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-muted": "",
+      "tooltip": false,
+      "format-icons": {
+        "headphone": "",
+        "default": ["", "", "󰕾", "󰕾", "󰕾", "", "", ""]
+      },
+      "on-click": "pavucontrol",
+      "scroll-step": 1,
+    },
+    "bluetooth": {
+      "format": " {status}",
+      "format-disabled": " off",
+      "format-connected": " {num_connections}",
+      "tooltip-format": "{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}   {device_address}",
+      "interval": 1,  // Update every second
+      "on-click": "blueman-manager"
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "on-click": "alacritty -e nmtui"
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": [
+        "",  // Battery 0–20%
+        "",  // Battery 20–40%
+        "",  // Battery 40–60%
+        "",  // Battery 60–80%
+        ""   // Battery 80–100%
+        ],
+        "tooltip": false,
+        "interval": 1,  // Update every second
+        "battery-path": "/sys/class/power_supply/BAT0"
+    },
+    "custom/exit": {
+        "format": "{icon}",
+        "format-icons": ["  Exit"],
+        "tooltip-format": "Powermenu",
+        "on-click": "wlogout -b 4",
+        "tooltip": false,
+    },
+}
