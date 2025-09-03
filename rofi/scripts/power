@@ -1,0 +1,22 @@
+#!/bin/bash
+
+options=$(echo -e "  Poweroff\n  Restart\n  Lock\n  Logout")
+
+selected_option=$(echo -e "$options" | rofi -dmenu -i -mesg "Bye "$USER"!" -config ~/.config/rofi/power.rasi)
+
+# Handle the selected option
+case $selected_option in
+    "  Poweroff")
+        systemctl poweroff
+        ;;
+    "  Restart")
+        systemctl reboot
+        ;;
+    "  Lock")
+        hyprlock
+        ;;
+    "  Logout")
+        pkill -KILL -u "$USER"
+        ;;
+esac
+

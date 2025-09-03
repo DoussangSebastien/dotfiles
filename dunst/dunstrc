@@ -1,0 +1,46 @@
+[global]
+origin = top-center
+offset = 0x50
+width = 400
+height = 100
+gap_size = 10
+
+### Appearance ###
+frame_width = 2
+frame_color = "#cba6f7"  # Purple border
+corner_radius = 10
+padding = 16
+horizontal_padding = 16
+text_icon_padding = 16
+
+### Text & Icons ###
+alignment = left
+vertical_alignment = center
+font = Monospace 10
+line_height = 2
+markup = full
+word_wrap = yes
+show_indicators = yes
+max_icon_size = 64
+
+### Behavior ###
+notification_limit = 5
+history_length = 20
+idle_threshold = 120
+timeout = 10
+
+[urgency_low]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+frame_color = "#cba6f7"  # ! Purple always
+
+[urgency_normal]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+frame_color = "#cba6f7"  # ! Purple always
+
+[urgency_critical]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+frame_color = "#cba6f7"  # ! Purple always
+timeout = 0

@@ -3,6 +3,7 @@
 wallpapers_dir="$HOME/wallpapers/"
 hyprlock_config="$HOME/.config/hypr/hyprlock.conf"
 hyprpaper_config="$HOME/.config/hypr/hyprpaper.conf"
+wlogout_css="$HOME/.config/wlogout/style.css"
 
 build_theme() {
   rows=$1
@@ -90,6 +91,14 @@ if [ -f "$hyprlock_config" ]; then
   notify-send "Hyprlock Wallpaper Updated" -i "$WALLPAPER" --app-name=Wallpaper
 else
   notify-send "Hyprlock config not found" "Could not update lock screen wallpaper" --app-name=Wallpaper
+fi
+
+# Update wlogout background
+if [ -f "$wlogout_css" ]; then
+  sed -i '/window {/,/}/ s|background-.*||g' "$wlogout_css"
+  sed -i "/window {/a\    background-image: url(\"$WALLPAPER\");\n    background-size: cover;\n    background-position: center;" "$wlogout_css"
+else
+  notify-send "wlogout config not found" "Could not update logout screen background" --app-name=wlogout
 fi
 
 exit 0
