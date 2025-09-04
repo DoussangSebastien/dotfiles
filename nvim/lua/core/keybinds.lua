@@ -31,6 +31,7 @@ keymap.set("n", "<leader>fn", "<cmd>Telescope help_tags<cr>")
 
 -- lsp
 keymap.set("n", "<leader>l", vim.diagnostic.open_float, bufopts)
+keymap.set("n", "<leader>rf", vim.lsp.buf.rename, {})
 
 -- transparency
 keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>")
@@ -38,12 +39,9 @@ keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>")
 -- treesitter
 -- c to comment line/blocks
 -- cc to uncomment line/blocks
+-- rf to refactor
 
 -- moveline
-local ok, moveline = pcall(require, "moveline")
-if not ok then
-  return
-end
 -- line (working only in lua/plugin/moveline.lua)
 -- vim.keymap.set('n', '<a-Up>', moveline.up)
 -- vim.keymap.set('n', '<a-Down>', moveline.down)
