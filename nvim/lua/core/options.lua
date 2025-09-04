@@ -1,10 +1,12 @@
+-- mapleader
+vim.g.mapleader = " "
+
 -- INDENTS
 vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.g.mapleader = " "
 
 -- line numbers
 vim.opt.relativenumber = false
@@ -14,14 +16,14 @@ vim.opt.number = true
 vim.opt.clipboard:append("unnamedplus")
 
 --start LSP
-vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
-  callback = function(args)
-    local clients = vim.lsp.get_clients({ bufnr = args.buf })
-    if #clients == 0 then
-      vim.cmd("LspStart")
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
+--   callback = function(args)
+--     local clients = vim.lsp.get_clients({ bufnr = args.buf })
+--     if #clients == 0 then
+--       vim.cmd("LspStart")
+--     end
+--   end,
+-- })
 
 -- EPITECH HEADERS
 vim.cmd([[
@@ -105,5 +107,6 @@ nnoremap <C-p> :call InsertHeaderPython()<CR>
 
 autocmd BufNewFile *.c call InsertHeaderC()
 autocmd BufNewFile *.h call InsertHeaderH()
+autocmd BufNewFile *.py call InsertHeaderPython()
 autocmd BufNewFile Makefile call InsertHeaderMakefile()
 ]])

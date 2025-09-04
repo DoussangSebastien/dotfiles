@@ -287,16 +287,16 @@ return {
       end
       
       -- Configuration auto des serveurs LSP
-      --require('mason-lspconfig').setup_handlers({
-      --  function(server_name)
-      --    local server_config = servers[server_name] or {}
-      --    server_config.capabilities = capabilities
-      --    server_config.on_attach = on_attach
-      --    server_config.autostart = true
-      --    
-      --    lspconfig[server_name].setup(server_config)
-      --  end,
-      --})
+      require('mason-lspconfig').setup_handlers({
+        function(server_name)
+          local server_config = servers[server_name] or {}
+          server_config.capabilities = capabilities
+          server_config.on_attach = on_attach
+          server_config.autostart = true
+          
+          lspconfig[server_name].setup(server_config)
+        end,
+      })
     end
   },
   {

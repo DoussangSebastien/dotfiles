@@ -17,5 +17,10 @@ return {
      keys = {
        { "<C-j>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
        { "<C-k>", function() Snacks.terminal():close() end, desc = "Quit Terminal", mode = {"n", "t"} },
-     }
+     },
+     config = function(_, opts)
+         require("snacks").setup(opts)
+         vim.ui.input = require("snacks.input").input
+         vim.ui.select = require("snacks.picker").select
+     end,
 }
