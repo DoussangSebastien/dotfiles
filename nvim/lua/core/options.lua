@@ -86,7 +86,6 @@ function! InsertHeaderH()
     let l:filename = expand("%:t")
     let l:dirname = fnamemodify(getcwd(), ':t')
     let l:macro_name = substitute(toupper(l:filename), '\.', '_', 'g') . '_'
-
     let l:header = [
                 \ '/*',
                 \ '** EPITECH PROJECT, 2025',

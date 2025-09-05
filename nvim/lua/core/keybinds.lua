@@ -12,16 +12,16 @@ keymap.set("n", "<Up>", "kzz", { desc = "Arrow up and center" })
 keymap.set("n", "<Down>", "jzz", { desc = "Arrow down and center" })
 
 -- indenting blocks
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+keymap.set("v", "<", "<gv")
+keymap.set("v", ">", ">gv")
 
 -- Ctrl + Z and Ctrl + Shift + Z
-vim.keymap.set("n", "<C-z>", "u", { noremap = true })
-vim.keymap.set("n", "<C-S-z>", "<C-r>", { noremap = true })
+keymap.set("n", "<C-z>", "u", { noremap = true })
+keymap.set("n", "<C-S-z>", "<C-r>", { noremap = true })
 
 -- nvim-tree
 keymap.set("n", "<leader>e", ":Neotree<CR>")
-vim.keymap.set("n", "<leader>z", ":Neotree close<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>z", ":Neotree close<CR>", { noremap = true, silent = true })
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
@@ -32,7 +32,7 @@ keymap.set("n", "<leader>fn", "<cmd>Telescope help_tags<cr>")
 
 -- lsp
 keymap.set("n", "<leader>l", vim.diagnostic.open_float, bufopts)
-vim.keymap.set("n", "<leader>rf", refactor.refactor, { desc = "Text refactor" })
+keymap.set("n", "<leader>rf", refactor.refactor, { desc = "Text refactor" })
 
 -- transparency
 keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>")
@@ -40,11 +40,10 @@ keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>")
 -- treesitter
 -- c to comment line/blocks
 -- cc to uncomment line/blocks
--- rf to refactor
 
 -- moveline
 -- line (working only in lua/plugin/moveline.lua)
--- vim.keymap.set('n', '<a-Up>', moveline.up)
--- vim.keymap.set('n', '<a-Down>', moveline.down)
--- vim.keymap.set('v', '<a-Up>', moveline.block_up)
--- vim.keymap.set('v', '<a-Down>', moveline.block_down)
+-- keymap.set('n', '<a-Up>', moveline.up)
+-- keymap.set('n', '<a-Down>', moveline.down)
+-- keymap.set('v', '<a-Up>', moveline.block_up)
+-- keymap.set('v', '<a-Down>', moveline.block_down)
