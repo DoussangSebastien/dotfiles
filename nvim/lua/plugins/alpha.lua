@@ -8,12 +8,8 @@ return {
             return
         end
 
-        local plugins_count
-        if vim.fn.has("win32") == 1 then
-            plugins_count = vim.fn.len(vim.fn.globpath("~/AppData/Local/nvim-data/site/pack/packer/start", "*", 0, 1))
-        else
-            plugins_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/start", "*", 0, 1))
-        end
+        local lazy_stats = require("lazy").stats()
+        local plugins_count = lazy_stats.count
 
         local dashboard = require("alpha.themes.dashboard")
         dashboard.section.header.val = {
@@ -41,13 +37,14 @@ return {
             '     ;MRui  ;:.   :Fui:;  :;;7i   .;;;rS:,  rr   ,:  :7EO:   ',
             '          ::::::,   .UUi:77;::37s7Lv7;  ,;3SD,....:;;,       ',
             '       BM: ..:i7rJLxS:  .      rs: 7   ..;LxxUWRFU;::7OW     ',
-            '        S2r:::iis0r;J3Or.:rvLi:::rBL.  .:;,  .   :ri:.,      ',
-            '                      .ZL. .:L;,r7;i7r;7:                    ',
-            '                              xMc     ,                      ',
-            '                             :. 3v                           ',
-            '                             :S  ;                           ',
-            '                              LB;                            ',
-            '                               7                             ',
+            '       ██████   █████              ███                       ',
+            '       ░░██████ ░░███              ░░░                       ',
+            '       ░███░███ ░███  █████ █████ ████  █████████████        ',
+            '       ░███░░███░███ ░░███ ░░███ ░░███ ░░███░░███░░███       ',
+            '       ░███ ░░██████  ░███  ░███  ░███  ░███ ░███ ░███       ',
+            '       ░███  ░░█████  ░░███ ███   ░███  ░███ ░███ ░███       ',
+            '       █████  ░░█████  ░░█████    █████ █████░███ █████      ',
+            '       ░░░░░    ░░░░░    ░░░░░    ░░░░░ ░░░░░ ░░░ ░░░░░      ',
 
         }
         dashboard.section.buttons.val = {
@@ -70,6 +67,7 @@ return {
         dashboard.section.header.opts.hl = "Include"
         dashboard.section.buttons.opts.hl = "Keyword"
         dashboard.opts.opts.noautocmd = true
+        dashboard.opts.layout[1].val = 0
 
         alpha.setup(dashboard.opts)
     end,
