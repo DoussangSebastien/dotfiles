@@ -1,5 +1,6 @@
 local keymap = vim.keymap
 local bufopts = { noremap = true, silent = true, buffer = bufnr }
+local refactor = require("core.refactor")
 
 -- Press '²' for the full list of keybinds ! 
 -- <leader> = ' ' and can be modified in /lua/core/options.lua
@@ -31,7 +32,7 @@ keymap.set("n", "<leader>fn", "<cmd>Telescope help_tags<cr>")
 
 -- lsp
 keymap.set("n", "<leader>l", vim.diagnostic.open_float, bufopts)
-keymap.set("n", "<leader>rf", vim.lsp.buf.rename, {})
+vim.keymap.set("n", "<leader>rf", refactor.refactor, { desc = "Text refactor" })
 
 -- transparency
 keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>")
