@@ -12,8 +12,24 @@ vim.opt.expandtab = true
 vim.opt.relativenumber = false
 vim.opt.number = true
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    if vim.fn.expand("%") == "" then
+      local fname = vim.fn.input("Enter filename: ")
+      if fname ~= "" then
+        vim.cmd("saveas " .. fname)
+      else
+        print("Save cancelled")
+        return
+      end
+    end
+  end
+})
+
 --clipboard
 vim.opt.clipboard:append("unnamedplus")
+
 
 --start LSP
 -- vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
