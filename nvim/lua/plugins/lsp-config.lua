@@ -280,55 +280,43 @@ return {
       })
       
       -- Configuration des signes de diagnostic
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local signs = { Error = "", Warn = "", Hint = "💡", Info = "" }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
-      
-      -- Configuration auto des serveurs LSP
-      require('mason-lspconfig').setup_handlers({
-        function(server_name)
-          local server_config = servers[server_name] or {}
-          server_config.capabilities = capabilities
-          server_config.on_attach = on_attach
-          server_config.autostart = true
-          
-          lspconfig[server_name].setup(server_config)
-        end,
-      })
     end
   },
-  {
-    'kosayoda/nvim-lightbulb',
-    event = 'BufReadPre',
-    config = function()
-      require('nvim-lightbulb').setup({
-        autocmd = { enabled = true },
-        ignore = {
-          clients = {},
-          filetypes = {},
-        },
-        sign = {
-          enabled = false,
-          priority = 10,
-        },
-        float = {
-          enabled = false,
-          text = "💡",
-          win_opts = {},
-        },
-        virtual_text = {
-          enabled = true,
-          text = "💡",
-          pos = "eol",
-        },
-        status_text = {
-          enabled = false,
-          text = "💡",
-          text_unavailable = ""
-        }
-      })
-    end
-  },
+--   {
+--     'kosayoda/nvim-lightbulb',
+--     event = 'BufReadPre',
+--     config = function()
+--       require('nvim-lightbulb').setup({
+--         autocmd = { enabled = true },
+--         ignore = {
+--           clients = {},
+--           filetypes = {},
+--         },
+--         sign = {
+--           enabled = false,
+--           priority = 10,
+--         },
+--         float = {
+--           enabled = false,
+--           text = "💡",
+--           win_opts = {},
+--         },
+--         virtual_text = {
+--           enabled = true,
+--           text = "💡",
+--           pos = "eol",
+--         },
+--         status_text = {
+--           enabled = false,
+--           text = "💡",
+--           text_unavailable = ""
+--         }
+--       })
+--     end
+--   },
 }
