@@ -1,25 +1,29 @@
-vim.api.nvim_create_user_command('W', function()
-  if vim.api.nvim_buf_get_name(0) ~= '' then
-    vim.cmd.write()
-  else
-    vim.ui.input({ prompt = 'Filename: ' }, function(path)
-      if path then vim.cmd('write ' .. path) end
-    end)
-  end
-end, {})
+local function save(opts)
+  local buf = vim.api.nvim_get_current_buf()
+  local has_name = vim.api.nvim_buf_get_name(buf) ~= ""
 
-vim.api.nvim_create_user_command('Wq', function()
-  if vim.api.nvim_buf_get_name(0) ~= '' then
-    vim.cmd.wq()
+  if has_name then
+    if opts.quit then
+      vim.cmd("wqall") 
+    else
+      vim.cmd("write")
+    end
   else
-    vim.ui.input({ prompt = 'Filename: ' }, function(path)
-      if path then vim.cmd('write ' .. path .. ' | q') end
+    vim.ui.input({ prompt = 'Save new file as: ' }, function(input)
+      if input and input ~= "" then
+        vim.cmd('write ' .. input)
+        if opts.quit then
+          vim.cmd("qa")
+        end
+      end
     end)
   end
-end, {})
+end
+
+vim.api.nvim_create_user_command('W', function() smart_handle({ quit = false }) end, {})
+vim.api.nvim_create_user_command('Wq', function() smart_handle({ quit = true }) end, {})
 
 vim.cmd([[
-cabbrev w W
-cabbrev wq Wq
+  cnoreabbrev <expr> w (getcmdtype() == ':' && getcmdline() == 'w') ? 'W' : 'w'
+  cnoreabbrev <expr> wq (getcmdtype() == ':' && getcmdline() == 'wq') ? 'Wq' : 'wq'
 ]])
-
