@@ -49,6 +49,10 @@ return {
           'clangd',
           'pyright',
           'ts_ls',
+          'html',
+          'cssls',
+          'rust_analyzer',
+          'gopls',
         },
         automatic_installation = true,
       })
@@ -232,11 +236,8 @@ return {
         },
       }
       
-      -- Configuration des keybindings LSP
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, noremap = true, silent = true }
-        
-        -- Keybindings essentiels
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -250,19 +251,16 @@ return {
           vim.lsp.buf.format { async = true } 
         end, opts)
         
-        -- Inlay hints toggle
         vim.keymap.set('n', '<leader>h', function()
           vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
         end, opts)
         
-        -- Diagnostics
         vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
         vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
       end
       
-      -- Configuration des diagnostics
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -279,7 +277,6 @@ return {
         },
       })
       
-      -- Configuration des signes de diagnostic
       local signs = { Error = "", Warn = "", Hint = "💡", Info = "" }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
