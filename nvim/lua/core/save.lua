@@ -20,8 +20,8 @@ local function save(opts)
   end
 end
 
-vim.api.nvim_create_user_command('W', function() smart_handle({ quit = false }) end, {})
-vim.api.nvim_create_user_command('Wq', function() smart_handle({ quit = true }) end, {})
+vim.api.nvim_create_user_command('W', function() save({ quit = false }) end, {})
+vim.api.nvim_create_user_command('Wq', function() save({ quit = true }) end, {})
 
 vim.cmd([[
   cnoreabbrev <expr> w (getcmdtype() == ':' && getcmdline() == 'w') ? 'W' : 'w'
