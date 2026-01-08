@@ -57,7 +57,7 @@ function! InsertHeaderC()
     let l:dirname = fnamemodify(getcwd(), ':t') " Get current directory name
     let l:header = [
                 \ '/*',
-                \ '** EPITECH PROJECT, 2025',
+                \ '** EPITECH PROJECT, 2026',
                 \ '** ' . l:dirname,
                 \ '** File description:',
                 \ '** ' . l:filename,
@@ -72,7 +72,7 @@ function! InsertHeaderMakefile()
     let l:dirname = fnamemodify(getcwd(), ':t') " Get current directory name
     let l:header = [
                 \ '##',
-                \ '## EPITECH PROJECT, 2025',
+                \ '## EPITECH PROJECT, 2026',
                 \ '## ' . l:dirname,
                 \ '## File description:',
                 \ '## ' . l:filename,
@@ -88,7 +88,7 @@ function! InsertHeaderPython()
     let l:header = [
                 \ '#!/usr/bin/env python3',
                 \ '#',
-                \ '# EPITECH PROJECT, 2025',
+                \ '# EPITECH PROJECT, 2026',
                 \ '# ' . l:dirname,
                 \ '# File description:',
                 \ '# ' . l:filename,
@@ -104,7 +104,7 @@ function! InsertHeaderH()
     let l:macro_name = substitute(toupper(l:filename), '\.', '_', 'g') . '_'
     let l:header = [
                 \ '/*',
-                \ '** EPITECH PROJECT, 2025',
+                \ '** EPITECH PROJECT, 2026',
                 \ '** ' . l:dirname,
                 \ '** File description:',
                 \ '** ' . l:filename,
@@ -118,10 +118,26 @@ function! InsertHeaderH()
     call append(0, l:header)
 endfunction
 
+function! InsertHeaderHaskell()
+    let l:filename = expand("%:t")
+    let l:dirname = fnamemodify(getcwd(), ':t')
+    let l:header = [
+                \ '{-',
+                \ '-- EPITECH PROJECT, 2026',
+                \ '-- ' . l:dirname,
+                \ '-- File description:',
+                \ '-- ' . l:filename,
+                \ '--',
+                \ '-}'
+                \ ]
+    call append(0, l:header)
+endfunction
+
 nnoremap <C-p> :call InsertHeaderPython()<CR>
 
 autocmd BufNewFile *.c call InsertHeaderC()
 autocmd BufNewFile *.h call InsertHeaderH()
 autocmd BufNewFile *.py call InsertHeaderPython()
 autocmd BufNewFile Makefile call InsertHeaderMakefile()
+autocmd BufNewFile *.hs call InsertHeaderHaskell()
 ]])
