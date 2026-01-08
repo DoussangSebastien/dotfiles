@@ -127,7 +127,6 @@ function! InsertHeaderHaskell()
                 \ '-- ' . l:dirname,
                 \ '-- File description:',
                 \ '-- ' . l:filename,
-                \ '--',
                 \ '-}'
                 \ ]
     call append(0, l:header)
