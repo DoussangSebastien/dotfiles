@@ -140,3 +140,24 @@ autocmd BufNewFile *.py call InsertHeaderPython()
 autocmd BufNewFile Makefile call InsertHeaderMakefile()
 autocmd BufNewFile *.hs call InsertHeaderHaskell()
 ]])
+
+local header_options = {
+    { label = "C", func = "InsertHeaderC" },
+    { label = ".h", func = "InsertHeaderH" },
+    { label = "Python", func = "InsertHeaderPython" },
+    { label = "Makefile", func = "InsertHeaderMakefile" },
+    { label = "Haskell", func = "InsertHeaderHaskell" },
+}
+
+vim.keymap.set("n", "<C-h>", function()
+    vim.ui.select(header_options, {
+        prompt = "Select header:",
+        format_item = function(item)
+            return item.label
+        end,
+    }, function(choice)
+        if choice then
+            vim.fn[choice.func]()
+        end
+    end)
+end, { noremap = true, silent = true, desc = "Insert Epitech Header" })
